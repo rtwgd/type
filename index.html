@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Typing</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-left">
+                <!-- モード表示を削除 -->
+            </div>
+            <div class="settings-container">
+                <button id="settingsBtn" class="settings-btn" title="設定">
+                    <svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19.43 12.98c.04-.32.07-.64.07-.98s-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.3-.61-.22l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65C14.46 2.18 14.25 2 14 2h-4c-.25 0-.46.18-.49.42l-.38 2.65c-.61.25-1.17.59-1.69.98l-2.49-1c-.23-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98s.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1c.52.4 1.08.73 1.69.98l.38 2.65c.03.24.24.42.49.42h4c.25 0 .46-.18.49-.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1c.23.09.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zM12 15.5c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z"></path></svg>
+                </button>
+                <div id="settingsMenu" class="settings-menu hidden">
+                    <div class="settings-section">
+                        <h4>基本設定</h4>
+                        <div class="setting-item">
+                            <label for="siteTitleInput">サイト名</label>
+                            <input type="text" id="siteTitleInput" placeholder="My Typing" maxlength="20">
+                        </div>
+                        <div class="setting-item">
+                            <label for="btn1Input">検索ボタン1</label>
+                            <input type="text" id="btn1Input" placeholder="検索" maxlength="15">
+                        </div>
+                        <div class="setting-item">
+                            <label for="btn2Input">検索ボタン2</label>
+                            <input type="text" id="btn2Input" placeholder="おまかせ" maxlength="15">
+                        </div>
+                    </div>
+                    <div class="settings-section">
+                        <h4>モード選択</h4>
+                        <div class="mode-selection-list">
+                            <label><input type="radio" name="mode" value="search" checked> 検索モード</label>
+                            <label><input type="radio" name="mode" value="typing"> タイピングモード</label>
+                            <label><input type="radio" name="mode" value="sushida"> 寿司打モード</label>
+                        </div>
+                    </div>
+                    <div class="settings-section">
+                        <h4>表示設定</h4>
+                        <div class="display-options">
+                            <label><input type="checkbox" id="showKanji" checked> 漢字</label>
+                            <hr style="width: 100%; border: 0; border-top: 1px solid #f1f3f4; margin: 5px 0;">
+                            <label><input type="radio" name="subDisplay" id="showHiragana"> ひらがなを表示</label>
+                            <label><input type="radio" name="subDisplay" id="showRomaji" checked> ローマ字を表示</label>
+                            <label><input type="radio" name="subDisplay" id="showNone"> 表示なし</label>
+                            <hr style="width: 100%; border: 0; border-top: 1px solid #f1f3f4; margin: 5px 0;">
+                            <div class="setting-item">
+                                <label for="shadowOpacity">お題の透明度</label>
+                                <input type="range" id="shadowOpacity" min="0" max="1" step="0.1" value="0.2">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="settings-section">
+                        <h4>難易度設定</h4>
+                        <div class="difficulty-selection">
+                            <select id="difficultySelect">
+                                <option value="easy">お手軽 (3,000円コース)</option>
+                                <option value="normal" selected>お勧め (5,000円コース)</option>
+                                <option value="hard">高級 (10,000円コース)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="main">
+            <div id="logo" class="logo">
+                <!-- JavaScriptで生成 -->
+            </div>
+            
+            <div class="search-section">
+                <div class="search-box">
+                    <div class="search-icon">
+                        <svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path></svg>
+                    </div>
+                    <div id="typingArea" class="typing-area">
+                        <div class="input-wrapper">
+                            <div id="targetText" class="target-text hidden">
+                                <span id="kanjiDisplay"></span>
+                                <span id="kanaDisplay"></span>
+                            </div>
+                            <input type="text" id="searchInput" autocomplete="off" spellcheck="false">
+                            <div id="typingDisplay" class="typing-display hidden"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="buttons">
+                    <button id="actionBtn">検索</button>
+                    <button id="luckyBtn">おまかせ</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <div id="stats" class="stats hidden">
+                KPS: <span id="kps">0.0</span> | 
+                Accuracy: <span id="accuracy">100</span>% | 
+                Progress: <span id="progress">0/0</span>
+            </div>
+            <div id="sushidaStats" class="stats hidden">
+                残り時間: <span id="timeLeft">0</span>秒 | 
+                獲得金額: <span id="earnedMoney">0</span>円 | 
+                連打: <span id="comboCount">0</span>打 | 
+                皿: <span id="dishCount">0</span>枚
+            </div>
+        </div>
+    </div>
+
+    <!-- リザルトモーダル -->
+    <div id="resultModal" class="modal hidden">
+        <div class="modal-content">
+            <h2 id="resultTitle">結果発表</h2>
+            <div class="result-main">
+                <div class="result-score">
+                    <span class="label">獲得金額:</span>
+                    <span id="resMoney" class="value">0</span><span class="unit">円</span>
+                </div>
+                <div class="result-stats-grid">
+                    <div class="stat-item">
+                        <span class="label">正しく打ったキー</span>
+                        <span id="resCorrect" class="value">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="label">平均タイプ数</span>
+                        <span id="resKps" class="value">0.0</span><span class="unit">回/秒</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="label">ミスタイプ数</span>
+                        <span id="resMiss" class="value">0</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="result-details">
+                <h4>詳細情報</h4>
+                <ul>
+                    <li><span class="label">コース料金</span><span class="value"><span id="resFee">0</span> 円</span></li>
+                    <li><span class="label">収支</span><span class="value"><span id="resProfit">0</span> 円</span></li>
+                    <li><span class="label">平均Latency (初打速度)</span><span class="value"><span id="resLatency">0.00</span> s</span></li>
+                    <li><span class="label">Accuracy (正確性)</span><span class="value"><span id="resAccuracy">0</span> %</span></li>
+                    <li><span class="label">Real KPS (純粋な速度)</span><span class="value"><span id="resRealKps">0.0</span> 回/秒</span></li>
+                    <li><span class="label">ミスなしの場合の予想記録</span><span class="value"><span id="resProjected">0</span> 円</span></li>
+                </ul>
+            </div>
+            
+            <div class="modal-buttons">
+                <button id="closeResultBtn">閉じる</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
